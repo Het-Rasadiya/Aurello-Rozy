@@ -52,7 +52,7 @@
     {%- render 'loading' -%}
     {%- section 'announcement-bar-slide' -%}
     {%- section 'header' -%}
-    {%- section 'store-messages' -%}
+    {% comment %}{%- section 'store-messages' -%}{% endcomment %}
     <div class="page-container page-element is-moved-by-drawer">
       {%- render 'breadcrumb' -%}
       <main class="main-content" id="MainContent" role="main">
@@ -62,7 +62,7 @@
           {%- if settings.enable_animationscroll -%}
             <div data-scroll-section>
             {% endif %}
-            {%- render 'slideshow' -%}
+            {% comment %}{%- render 'slideshow' -%}{% endcomment %}
             {%- if settings.enable_animationscroll -%}
             </div>
           {% endif %}
