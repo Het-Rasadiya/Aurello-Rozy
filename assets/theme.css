@@ -7509,6 +7509,8 @@ body.modal--is-active {
 .image-content__image-wrapper {
   display: block;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 }
 .image-content__image-wrapper img {
   position: absolute;
@@ -7517,6 +7519,25 @@ body.modal--is-active {
   right: 0;
   width: 100%;
   height: auto;
+}
+.image-content__image-wrapper.square {
+  padding-top: 100% !important;
+}
+.image-content__image-wrapper.landscape {
+  padding-top: 75% !important;
+}
+.image-content__image-wrapper.portrait {
+  padding-top: 130% !important;
+}
+.image-content__image-wrapper.wide {
+  padding-top: 60% !important;
+}
+.image-content__image-wrapper.square img,
+.image-content__image-wrapper.landscape img,
+.image-content__image-wrapper.portrait img,
+.image-content__image-wrapper.wide img {
+  height: 100% !important;
+  object-fit: cover !important;
 }
 .featured-product__text {
   margin-top: 5px;
