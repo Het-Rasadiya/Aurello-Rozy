@@ -755,7 +755,14 @@
                 </div>
                 <div id="tabp-{{ block.id }}" class="collapse tab-content">
                   <div class="py-3">
-                  {{ block.settings.answer_content | default: 'Answer' }}
+                  {%- if block.settings.show_description -%}
+                    {{ product.description }}
+                  {%- endif -%}
+                  {%- if block.settings.show_description == false and block.settings.answer_content == blank and block.settings.page == blank -%}
+                    Answer
+                  {%- else -%}
+                    {{ block.settings.answer_content }}
+                  {%- endif -%}
                   {{ block.settings.page.content }}
                   </div>
                 </div>
@@ -1828,6 +1835,12 @@ initPhotoSwipeFromDOM('.my-gallery');
           "type": "page",
           "id": "page",
           "label": "Select Page"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_description",
+          "label": "Show Product Description",
+          "default": false
         }
       ]
     },
