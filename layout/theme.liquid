@@ -52,6 +52,7 @@
     {%- render 'loading' -%}
     {%- section 'announcement-bar-slide' -%}
     {%- section 'header' -%}
+    <hr class="header-bottom-divider" style="margin: 0; border: 0; border-top: 1px solid #7F0019; z-index: 9;">
     {% comment %}{%- section 'store-messages' -%}{% endcomment %}
     <div class="page-container page-element is-moved-by-drawer">
       {%- render 'breadcrumb' -%}
@@ -71,6 +72,8 @@
           </div>
         {% endif %}
       </main>
+
+      <hr class="footer-top-divider" style="margin: 0; border: 0; border-top: 1px solid #7F0019; z-index: 9;">
 
      {%- liquid
       section 'banner-footer'
