@@ -2261,5 +2261,134 @@
         "label": "Image in cart page"
       }
     ]
+  },
+  {
+    "name": "Product Detail Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Title"
+      },
+      {
+        "type": "range",
+        "id": "product_title_size",
+        "label": "Font Size",
+        "max": 80,
+        "min": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 36
+      },
+      {
+        "type": "color",
+        "id": "product_title_color",
+        "label": "Color",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "header",
+        "content": "Product Price"
+      },
+      {
+        "type": "range",
+        "id": "product_price_size",
+        "label": "Font Size",
+        "max": 60,
+        "min": 14,
+        "step": 1,
+        "unit": "px",
+        "default": 24
+      },
+      {
+        "type": "color",
+        "id": "product_price_color",
+        "label": "Color",
+        "default": "#7F0019"
+      },
+      {
+        "type": "select",
+        "id": "product_price_weight",
+        "label": "Font Weight",
+        "default": "500",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light"
+          },
+          {
+            "value": "400",
+            "label": "Normal"
+          },
+          {
+            "value": "500",
+            "label": "Medium"
+          },
+          {
+            "value": "600",
+            "label": "Semi Bold"
+          },
+          {
+            "value": "700",
+            "label": "Bold"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Product Compare Price"
+      },
+      {
+        "type": "range",
+        "id": "product_compare_price_size",
+        "label": "Font Size",
+        "max": 60,
+        "min": 12,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "color",
+        "id": "product_compare_price_color",
+        "label": "Color",
+        "default": "#737373"
+      },
+      {
+        "type": "select",
+        "id": "product_compare_price_weight",
+        "label": "Font Weight",
+        "default": "400",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light"
+          },
+          {
+            "value": "400",
+            "label": "Normal"
+          },
+          {
+            "value": "500",
+            "label": "Medium"
+          },
+          {
+            "value": "600",
+            "label": "Semi Bold"
+          },
+          {
+            "value": "700",
+            "label": "Bold"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold"
+          }
+        ]
+      }
+    ]
   }
 ]

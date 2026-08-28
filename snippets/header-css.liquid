@@ -346,4 +346,33 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
         background-color: var(--g-main);
       }
     {% endunless %}
+
+    /* Product Page Title and Prices Custom Overrides */
+    .product-single__title {
+      font-size: {{ settings.product_title_size }}px !important;
+      color: {{ settings.product_title_color }} !important;
+    }
+    .product-single__price:not(.product-single__price--compare) {
+      font-size: {{ settings.product_price_size }}px !important;
+      color: {{ settings.product_price_color }} !important;
+      font-weight: {{ settings.product_price_weight }} !important;
+    }
+    .product-single__price--compare {
+      font-size: {{ settings.product_compare_price_size }}px !important;
+      color: {{ settings.product_compare_price_color }} !important;
+      font-weight: {{ settings.product_compare_price_weight }} !important;
+    }
+
+    @media (max-width: 991px) {
+      .product-single__title {
+        font-size: clamp(20px, calc({{ settings.product_title_size }}px * 0.75), 42px) !important;
+        line-height: 1.2 !important;
+      }
+      .product-single__price:not(.product-single__price--compare) {
+        font-size: clamp(18px, calc({{ settings.product_price_size }}px * 0.85), 32px) !important;
+      }
+      .product-single__price--compare {
+        font-size: clamp(14px, calc({{ settings.product_compare_price_size }}px * 0.85), 24px) !important;
+      }
+    }
 </style>
