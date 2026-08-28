@@ -43,9 +43,9 @@
 
   @media (max-width: 767px) {
     #custom-hero-banner-{{ section.id }} .hero-banner-slider {
-      {% if section.settings.mobile_height == 'adapt' %}
-        aspect-ratio: {{ mobile_aspect }};
-        height: auto;
+      {% if section.settings.mobile_height == 'adapt' or has_mobile_image %}
+        aspect-ratio: {{ mobile_aspect }} !important;
+        height: auto !important;
       {% else %}
         height: {{ section.settings.mobile_height }};
       {% endif %}
