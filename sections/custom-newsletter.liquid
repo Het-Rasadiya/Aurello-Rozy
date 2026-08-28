@@ -1,0 +1,532 @@
+<!-- sections/custom-newsletter.liquid -->
+
+{%- liquid
+  assign setwidth = section.settings.setwidth
+  assign sub_title = section.settings.sub_title
+  assign title = section.settings.title
+  assign description = section.settings.description
+  assign placeholder_text = section.settings.placeholder_text
+  assign button_text = section.settings.button_text
+  assign form_width = section.settings.form_width
+  assign gap_desktop = section.settings.gap_desktop
+  assign gap_mobile = section.settings.gap_mobile
+  
+  assign bg_color = section.settings.bg_color
+  assign sub_title_color = section.settings.sub_title_color
+  assign title_color = section.settings.title_color
+  assign desc_color = section.settings.desc_color
+  
+  assign input_bg_color = section.settings.input_bg_color
+  assign input_border_color = section.settings.input_border_color
+  assign input_border_focus_color = section.settings.input_border_focus_color
+  assign input_text_color = section.settings.input_text_color
+  assign input_border_thickness = section.settings.input_border_thickness
+  assign input_radius = section.settings.input_radius
+  
+  assign btn_bg_color = section.settings.btn_bg_color
+  assign btn_text_color = section.settings.btn_text_color
+  assign btn_hover_bg_color = section.settings.btn_hover_bg_color
+  assign btn_hover_text_color = section.settings.btn_hover_text_color
+  assign btn_radius = section.settings.btn_radius
+-%}
+
+{%- render 'style-section' -%}
+
+<style>
+  .custom-newsletter-{{ section.id }} {
+    width: 100%;
+    background-color: {{ bg_color }};
+  }
+
+  .custom-newsletter-content-{{ section.id }} {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .custom-newsletter-subtitle-{{ section.id }} {
+    font-size: {{ section.settings.sub_title_size }}px;
+    color: {{ sub_title_color }};
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .custom-newsletter-title-{{ section.id }} {
+    font-size: {{ section.settings.title_size }}px;
+    color: {{ title_color }};
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
+
+  .custom-newsletter-description-{{ section.id }} {
+    font-size: {{ section.settings.desc_size }}px;
+    color: {{ desc_color }};
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .custom-newsletter-form-wrapper-{{ section.id }} {
+    width: 100%;
+    max-width: {{ form_width }}px;
+    margin: 0 auto;
+  }
+
+  .custom-newsletter-input-group-{{ section.id }} {
+    display: flex;
+    gap: {{ gap_desktop }}px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .custom-newsletter-input-{{ section.id }} {
+    flex: 1;
+    background-color: {{ input_bg_color }};
+    border: {{ input_border_thickness }}px solid {{ input_border_color }};
+    color: {{ input_text_color }};
+    padding: 12px 20px;
+    font-size: 15px;
+    border-radius: {{ input_radius }}px;
+    outline: none;
+    box-sizing: border-box;
+    height: 48px;
+    transition: border-color 0.3s ease;
+  }
+
+  .custom-newsletter-input-{{ section.id }}:focus {
+    border-color: {{ input_border_focus_color }};
+  }
+
+  .custom-newsletter-btn-{{ section.id }} {
+    background-color: {{ btn_bg_color }};
+    color: {{ btn_text_color }};
+    border: none;
+    padding: 0 45px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: {{ btn_radius }}px;
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  }
+
+  .custom-newsletter-btn-{{ section.id }}:hover {
+    background-color: {{ btn_hover_bg_color }};
+    color: {{ btn_hover_text_color }};
+  }
+
+  .custom-newsletter-btn-{{ section.id }}:active {
+    transform: scale(0.98);
+  }
+
+  .custom-newsletter-success-{{ section.id }} {
+    color: #28a745;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 15px 0 0 0;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 767px) {
+    .custom-newsletter-title-{{ section.id }} {
+      font-size: {{ section.settings.title_size_mobile }}px;
+    }
+    
+    .custom-newsletter-description-{{ section.id }} {
+      font-size: {{ section.settings.desc_size_mobile }}px;
+      margin-bottom: 24px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .custom-newsletter-input-group-{{ section.id }} {
+      flex-direction: column;
+      gap: {{ gap_mobile }}px;
+      align-items: stretch;
+    }
+
+    .custom-newsletter-input-{{ section.id }} {
+      width: 100%;
+    }
+
+    .custom-newsletter-btn-{{ section.id }} {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="customstyle{{ section.id }} custom-newsletter-{{ section.id }}" 
+     data-aos="{{ section.settings.animation }}"
+     data-section-id="{{ section.id }}">
+  <div class="{{ setwidth }}">
+    <div class="custom-newsletter-content-{{ section.id }}">
+      
+      {%- if sub_title != blank -%}
+        <span class="custom-newsletter-subtitle-{{ section.id }}">{{ sub_title }}</span>
+      {%- endif -%}
+
+      {%- if title != blank -%}
+        <h2 class="custom-newsletter-title-{{ section.id }}">{{ title }}</h2>
+      {%- endif -%}
+
+      {%- if description != blank -%}
+        <div class="custom-newsletter-description-{{ section.id }}">{{ description }}</div>
+      {%- endif -%}
+
+      <div class="custom-newsletter-form-wrapper-{{ section.id }}">
+        {%- form 'customer', id: 'custom-newsletter-form' -%}
+          {{ form.errors | default_errors }}
+          {%- if form.posted_successfully? -%}
+            <p class="custom-newsletter-success-{{ section.id }}">
+              {{ 'general.newsletter_form.confirmation' | t | default: "Thanks for subscribing!" }}
+            </p>
+          {%- else -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="custom-newsletter-input-group-{{ section.id }}">
+              <input type="email" 
+                     value="{% if customer %}{{ customer.email }}{% endif %}" 
+                     placeholder="{{ placeholder_text }}" 
+                     name="contact[email]" 
+                     class="custom-newsletter-input-{{ section.id }}" 
+                     autocorrect="off" 
+                     autocapitalize="off"
+                     required>
+              <button type="submit" class="custom-newsletter-btn-{{ section.id }}" name="commit">
+                {{ button_text }}
+              </button>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Newsletter",
+  "class": "index-section custom-newsletter-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "select",
+      "id": "setwidth",
+      "label": "Width Layout",
+      "default": "container",
+      "options": [
+        {
+          "value": "container",
+          "label": "Box"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Container Fluid"
+        },
+        {
+          "value": "full",
+          "label": "Full Width"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "form_width",
+      "label": "Form Max Width",
+      "min": 300,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 650
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Desktop Gap (Input/Button)",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Mobile Gap (Stacked)",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Newsletter Content"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title Top",
+      "default": "STAY IN THE LOOP"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Heading",
+      "default": "GET 10% OFF YOUR FIRST ORDER"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "New arrivals, restocks and the occasional discount code – nothing else."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Email Input Placeholder",
+      "default": "E-mail"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "SUBSCRIBE"
+    },
+    {
+      "type": "header",
+      "content": "Typography Sizing"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_size",
+      "label": "Subtitle Font Size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Heading Font Size (Desktop)",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Heading Font Size (Mobile)",
+      "min": 16,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desc_size",
+      "label": "Description Font Size (Desktop)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "desc_size_mobile",
+      "label": "Description Font Size (Mobile)",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Colors Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "sub_title_color",
+      "label": "Subtitle Color",
+      "default": "#800020"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Heading Color",
+      "default": "#800020"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Color",
+      "default": "#800020"
+    },
+    {
+      "type": "header",
+      "content": "Form Field Styling"
+    },
+    {
+      "type": "color",
+      "id": "input_bg_color",
+      "label": "Input Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input Border Color",
+      "default": "#f5e6cf"
+    },
+    {
+      "type": "color",
+      "id": "input_border_focus_color",
+      "label": "Input Focus Border Color",
+      "default": "#800020"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "input_border_thickness",
+      "label": "Input Border Thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "input_radius",
+      "label": "Input Rounded Radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Button Styling"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background",
+      "default": "#800020"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_bg_color",
+      "label": "Button Hover Background",
+      "default": "#600018"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "btn_radius",
+      "label": "Button Rounded Radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Animation & Section Spacing"
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Section Scroll Animation",
+      "default": "",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade Up" },
+        { "value": "fade-down", "label": "Fade Down" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "paddingsection",
+      "label": "Padding Section (Desktop)",
+      "default": "80px 0px 80px 0px",
+      "info": "Format: top right bottom left"
+    },
+    {
+      "type": "text",
+      "id": "marginsection",
+      "label": "Margin Section (Desktop)",
+      "default": "0px 0px 0px 0px",
+      "info": "Format: top right bottom left"
+    },
+    {
+      "type": "text",
+      "id": "paddingmobile",
+      "label": "Padding Section (Mobile)",
+      "default": "60px 0px 60px 0px"
+    },
+    {
+      "type": "text",
+      "id": "marginmobile",
+      "label": "Margin Section (Mobile)",
+      "default": "0px 0px 0px 0px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Newsletter",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}
