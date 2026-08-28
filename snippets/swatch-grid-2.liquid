@@ -32,7 +32,15 @@
       {% comment %}{%- assign currenVariant = product.variants[forloop.index0] -%} {% endcomment %}
       {%- assign hasImage = false -%}
       {%- if isColor and currenVariant.image -%}
-      {%- assign hasImage = true -%}
+        {%- assign hasImage = true -%}
+      {%- endif -%}
+      {%- assign isVariantImageOption = false -%}
+      {%- if optionName contains 'style' or optionName contains 'variant' or optionName contains 'pattern' or optionName contains 'material' or optionName contains 'design' or optionName contains 'type' or optionName contains 'flavor' or optionName contains 'model' -%}
+        {%- assign isVariantImageOption = true -%}
+      {%- endif -%}
+      {%- assign isVariantImage = false -%}
+      {%- if currenVariant.image and isColor == false and isVariantImageOption -%}
+        {%- assign isVariantImage = true -%}
       {%- endif -%}
       <input type="radio"
              {% if option.selected_value == value %} checked="checked"{% endif %}
@@ -41,9 +49,9 @@
              name="{{ option.name | handleize }}"
              class="single-option-selector-{{ formId }} single-option-selector__radio"
              id="ProductSelect-option-{{ formId }}-{{ option.name | handleize }}-{{ value | escape }}">
-      <label {% if hasImage %}data-tooltip="true" title="{{ value | escape }}" style="background-image:url({{ currenVariant.image.src | image_url: width: 100 }})"{% endif %}
+      <label {% if isColor and currenVariant.image %}data-tooltip="true" title="{{ value | escape }}" style="background-image:url({{ currenVariant.image.src | image_url: width: 100 }})"{% elsif isVariantImage %}data-tooltip="true" title="{{ value | escape }}" class="variant-image-swatch-grid" style="background-image:url({{ currenVariant.image.src | image_url: width: 100 }})"{% endif %}
              for="ProductSelect-option-{{ formId }}-{{ option.name | handleize }}-{{ value | escape }}">
-        {%- unless hasImage %}{{ value | escape }}{%- endunless -%}
+        {%- unless isColor and currenVariant.image or isVariantImage %}{{ value | escape }}{%- endunless -%}
       </label>
       {%- endfor -%}
     </fieldset>
