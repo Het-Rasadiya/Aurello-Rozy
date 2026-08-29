@@ -189,6 +189,47 @@
       fill: {{ section.settings.quick_add_color }} !important;
       color: {{ section.settings.quick_add_color }} !important;
     }
+    /* Flex grid alignments to ensure all product cards sit in one row */
+    .customstyle{{ section.id }} .productlist-item {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .customstyle{{ section.id }} .product-card {
+      display: flex !important;
+      flex-direction: column !important;
+      height: 100% !important;
+      width: 100% !important;
+    }
+    .customstyle{{ section.id }} .product-card__image-wr {
+      flex-grow: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+    }
+    .customstyle{{ section.id }} .product-card__image-wr a.product-card__image {
+      width: 100% !important;
+    }
+    .customstyle{{ section.id }} .product-card__info {
+      margin-top: auto !important;
+    }
+    .customstyle{{ section.id }} .product-card__price {
+      white-space: nowrap !important;
+    }
+    @media (max-width: 767px) {
+      .customstyle{{ section.id }} .product-card__price {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: normal !important;
+        min-height: 38px !important;
+      }
+      .customstyle{{ section.id }} .product-card__regular-price {
+        margin-left: 0 !important;
+        margin-top: 2px !important;
+      }
+    }
 {% endstyle %}
 <div class="customstyle{{ section.id }}" data-aos="{{ section.settings.animation }}">
   {%- render 'style-section' -%}
