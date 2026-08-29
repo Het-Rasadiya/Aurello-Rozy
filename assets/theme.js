@@ -5130,11 +5130,14 @@ theme.swatchCard = (function(){
 
 theme.swatchCard2 = (function(){
   function initVariant(id){
-    var productJson = JSON.parse($('.customJson-' + id).html());
+    var $jsonEl = $('.customJson-' + id);
+    if ($jsonEl.length === 0) return;
+    var productJson = JSON.parse($jsonEl.html());
     var $selectorForm = $('.customform-' + id);
     var $button = $('.js-customform-addtocart-' + id);
     var $buttontext = $button.find('span');
     var $wrapObject = $selectorForm.closest('.js-product-card');
+    
     var options = {
       $container: $selectorForm,
       enableHistoryState: false,
@@ -5146,33 +5149,54 @@ theme.swatchCard2 = (function(){
     var AjaxCart = new window.AjaxCart($selectorForm);
     var _updateButton = function (evt){
       var variant = evt.variant;
+      var $gridCart = $wrapObject.find('.js-grid-cart');
       if (variant === undefined){
         $button.prop('disabled', true).removeClass('btn--sold-out');
         $buttontext.html(theme.strings.unavailable);
+        $gridCart.addClass('disabled').attr('data-id', '').data('id', '').attr('title', theme.strings.unavailable);
       }else{
+        $gridCart.attr('data-id', variant.id).data('id', variant.id);
         if (variant.available){
           $button.removeClass('btn--sold-out').prop('disabled', false);
           $buttontext.html(theme.strings.addToCart);
+          $gridCart.removeClass('disabled').attr('title', theme.strings.addToCart);
         }else{
-          $button.prop('disabled', true).addClass('btn--sold-out');
+          $button.addClass('btn--sold-out').prop('disabled', true);
           $buttontext.html(theme.strings.soldOut);
+          $gridCart.addClass('disabled').attr('title', theme.strings.soldOut);
         }
       }
     }
     var _updateImage = function (evt){
       var variant = evt.variant;
-      var $mainImage = $wrapObject.find('.product-card__image').find('img');
-      if (variant !== undefined && variant.featured_image !== null){
-        var variantImage = variant.featured_image;
-        $mainImage.attr('srcset',variantImage.src);
+      var $mainImage = $wrapObject.find('.product-card__image').find('.first-image');
+      if (variant !== undefined) {
+        var imageSrc = null;
+        if (variant.featured_image && variant.featured_image.src) {
+          imageSrc = variant.featured_image.src;
+        } else if (variant.image) {
+          imageSrc = typeof variant.image === 'string' ? variant.image : (variant.image.src || null);
+        }
+        if (imageSrc) {
+          $mainImage.removeClass('lazyloaded').addClass('lazyload')
+                    .attr('srcset', imageSrc)
+                    .attr('src', imageSrc)
+                    .attr('data-src', imageSrc);
+        }
       }
     }
     var _updatePrice = function (evt){
       var $price = $wrapObject.find('.product-card__price');
       var variant = evt.variant;
       if (variant !== undefined){
-        var htmlComparePrice = variant.compare_at_price !== null ? '<s class="product-card__regular-price"><span class="money">'+variant.compare_at_price+'</span></s>' : '';
-        var htmlPrice = '<span class="money">'+variant.price+'</span>' + htmlComparePrice ;
+        if (variant.compare_at_price !== null && variant.compare_at_price > variant.price) {
+          $price.addClass('product-card__pricesale');
+          var htmlComparePrice = '<s class="product-card__regular-price"><span class="money">'+ theme.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat) +'</span></s>';
+        } else {
+          $price.removeClass('product-card__pricesale');
+          var htmlComparePrice = '';
+        }
+        var htmlPrice = '<span class="money">'+ theme.Currency.formatMoney(variant.price, theme.moneyFormat) +'</span> ' + htmlComparePrice ;
         $price.html(htmlPrice);
         //theme.updateCurrencies();
       }
@@ -5194,11 +5218,18 @@ theme.swatchCard2 = (function(){
     })
   }
 
-  initForm();
+  $(document).ready(function() {
+    initForm();
+  });
+  $(document).on('shopify:section:load', function() {
+    initForm();
+  });
   return{
     load:initForm
   }
 })()
+
+
 
 // Loading
 theme.loading = (function(){

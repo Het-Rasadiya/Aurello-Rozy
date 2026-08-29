@@ -14198,3 +14198,152 @@ blockquote::before {
     min-width: 48px !important;
   }
 }
+
+/* Quick Add Button absolute positioned inside the card image wrapper */
+.product-card__image-wr {
+  position: relative !important;
+}
+
+.product-card__image-wr .product-card__quick-add-btn {
+  position: absolute !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  z-index: 5 !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+.product-card__quick-add-btn svg {
+  width: 12px !important;
+  height: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+@media (max-width: 767px) {
+  .product-card__image-wr .product-card__quick-add-btn {
+    right: 8px !important;
+    bottom: 8px !important;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .product-card__image-wr .product-card__quick-add-btn svg {
+    width: 10px !important;
+    height: 10px !important;
+  }
+}
+
+/* Loading spinner for quick add */
+.product-card__quick-add-btn .product-card__loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  margin-left: -7px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.product-card__quick-add-btn.is-loading .product-card__loading {
+  opacity: 1 !important;
+}
+
+.product-card__quick-add-btn.is-loading svg {
+  opacity: 0 !important;
+}
+
+/* Compact Swatches/Variants inside Product Grid Card */
+.product-card .js-customform {
+  padding-top: 8px !important;
+  border-top: 1px solid #f2f2f2;
+  margin-top: 8px;
+}
+
+.product-card .selector-wrapper {
+  margin-bottom: 8px !important;
+  text-align: left;
+}
+
+.product-card .selector-wrapper label {
+  font-size: 11px !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px !important;
+  display: block;
+  color: #777;
+}
+
+.product-card .single-option-radio {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  justify-content: flex-start;
+}
+
+/* Swatches label text options (e.g. Size: S, M, L) */
+.product-card .single-option-radio label {
+  font-size: 11px !important;
+  font-weight: 500;
+  padding: 4px 10px !important;
+  margin: 0 !important;
+  min-width: unset !important;
+  height: auto !important;
+  border-radius: 4px !important;
+  border: 1px solid #ddd !important;
+  background-color: #fff !important;
+  color: #333 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease;
+  position: relative;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Hover/Active option state */
+.product-card .single-option-radio input[type="radio"]:checked + label {
+  border-color: var(--g-main, #000) !important;
+  background-color: var(--g-main, #000) !important;
+  color: #fff !important;
+}
+
+/* Swatches label color options (e.g. Color: Red, Blue) */
+.product-card .single-option-radio label[title] {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 50% !important;
+  border: 1px solid #e0e0e0 !important;
+  background-size: cover !important;
+  background-position: center !important;
+  padding: 0 !important;
+  display: inline-block !important;
+  transition: all 0.2s ease;
+}
+
+.product-card .single-option-radio label[title]:after {
+  display: none !important;
+}
+
+.product-card .single-option-radio input[type="radio"]:checked + label[title] {
+  border: 2px solid var(--g-main, #000) !important;
+  box-shadow: 0 0 0 2px #fff, 0 0 4px rgba(0,0,0,0.3) !important;
+}

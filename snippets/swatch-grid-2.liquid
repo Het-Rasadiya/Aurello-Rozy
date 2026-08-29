@@ -1,6 +1,6 @@
 {%- if settings.e_swatch -%}
 {%- assign formId = section.id | append: '-' | append: product.id -%}
-<div class="js-customform pt-2" data-id="{{ formId }}">
+<div class="js-customform pt-2{% unless product.has_only_default_variant %} has-variants{% endunless %}" data-id="{{ formId }}">
   {%- assign current_variant = product.selected_or_first_available_variant -%}
   {%- capture form_class %}customform-{{ formId }} js-form--notice{%- endcapture -%}
   {%- form 'product', product, class: form_class -%}
@@ -14,7 +14,7 @@
     {%- assign isColor = true -%}
     {%- endif -%}
     <fieldset class="single-option-radio"
-              name="{{ option.name | handleize }}"
+              name="{{ option.name | handleize }}-{{ formId }}"
               id="ProductSelect-option-{{ formId }}-{{ forloop.index0 }}">
       {%- liquid
         assign option_index = forloop.index
@@ -46,12 +46,21 @@
              {% if option.selected_value == value %} checked="checked"{% endif %}
              value="{{ value | escape }}"
              data-index="option{{ option_index }}"
-             name="{{ option.name | handleize }}"
+             name="{{ option.name | handleize }}-{{ formId }}"
              class="single-option-selector-{{ formId }} single-option-selector__radio"
              id="ProductSelect-option-{{ formId }}-{{ option.name | handleize }}-{{ value | escape }}">
-      <label {% if isColor and currenVariant.image %}data-tooltip="true" title="{{ value | escape }}" style="background-image:url({{ currenVariant.image.src | image_url: width: 100 }})"{% elsif isVariantImage %}data-tooltip="true" title="{{ value | escape }}" class="variant-image-swatch-grid" style="background-image:url({{ currenVariant.image.src | image_url: width: 100 }})"{% endif %}
+      <label {% if isColor %}
+               data-tooltip="true" title="{{ value | escape }}" 
+               {% if currenVariant.image %}
+                 style="background-image:url({{ currenVariant.image.src | image_url: width: 100 }});"
+               {% else %}
+                 style="background-color:{{ value | escape | downcase }};"
+               {% endif %}
+             {% elsif isVariantImage %}
+               data-tooltip="true" title="{{ value | escape }}" class="variant-image-swatch-grid" style="background-image:url({{ currenVariant.image.src | image_url: width: 100 }})"
+             {% endif %}
              for="ProductSelect-option-{{ formId }}-{{ option.name | handleize }}-{{ value | escape }}">
-        {%- unless isColor and currenVariant.image or isVariantImage %}{{ value | escape }}{%- endunless -%}
+        {%- unless isColor or isVariantImage %}{{ value | escape }}{%- endunless -%}
       </label>
       {%- endfor -%}
     </fieldset>
@@ -68,6 +77,7 @@
   <input type="number" name="quantity" value="1" min="1" class="no-js">
 
 
+  {%- unless hide_submit -%}
   <div class="product-form__item product-form__item--submit ">
     <button class="mr-auto js-customform-addtocart-{{ formId }} border-radius-0 g-btn btn btn-underline gradient-theme {% unless product.available %} btn--sold-out{% endunless %}" type="submit" name="add" {% unless current_variant.available %}disabled="disabled"{% endunless %}>
       <span>
@@ -100,6 +110,7 @@
       {%- endif -%}
     </div>
   </div>
+  {%- endunless -%}
   {%- endform -%}
   <script type="application/json" class="customJson-{{ formId }}">
     		{{ product | json }}

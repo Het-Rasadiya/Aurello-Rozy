@@ -354,13 +354,29 @@
       endif
       render 'product-label', product: product
     -%}
+    {%- if enable_quick_add -%}
+    <span class="btn btn-theme product-card__quick-add-btn js-grid-cart {% unless product.available %} disabled {% endunless %}" 
+      {% if product.available %}
+        title="{{ 'products.product.add_to_cart' | t }}" 
+      {% else %}
+        title="{{ 'products.product.sold_out' | t }}" 
+      {% endif %} 
+      data-id="{{ product.selected_or_first_available_variant.id }}">
+      {%- render 'icon-plus' -%}
+      <div class="product-card__loading spinner-{{ settings.loading }}" role="status"></div>
+    </span>
+    {%- endif -%}
   </div>
   <div class="product-card__info">
     {{ vendor }}
     <a href="{{ product.url | within: collection }}" title="{{ product.title }}" class="d-block product-card__name {% if settings.t_product %} text-uppercase {% endif %}">{{ product.title }}</a>
     {{ review }}
     {{ price }}
-    {%- render 'swatch-grid-1' , product : product -%}
+    {%- if show_variants -%}
+      {%- render 'swatch-grid-2', product: product, hide_submit: true -%}
+    {%- else -%}
+      {%- render 'swatch-grid-1', product: product -%}
+    {%- endif -%}
   </div>
 </div>
 
