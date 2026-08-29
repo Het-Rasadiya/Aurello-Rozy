@@ -99,20 +99,7 @@
         margin-bottom:30px;
       }
     }
-    {% if section.settings.price_color != blank %}
-    .customstyle{{ section.id }} .product-card__price,
-    .customstyle{{ section.id }} .product-card__pricesale,
-    .customstyle{{ section.id }} .product-card__price span,
-    .customstyle{{ section.id }} .product-card__pricesale span {
-      color: {{ section.settings.price_color }} !important;
-    }
-    {% endif %}
-    {% if section.settings.compare_price_color != blank %}
-    .customstyle{{ section.id }} .product-card__regular-price,
-    .customstyle{{ section.id }} .product-card__regular-price span {
-      color: {{ section.settings.compare_price_color }} !important;
-    }
-    {% endif %}
+
     {% if section.settings.variant_width != blank %}
     .customstyle{{ section.id }} .product-card .single-option-radio label[title] {
       width: {{ section.settings.variant_width }}px !important;
@@ -524,18 +511,7 @@
       "id": "collection",
       "type": "collection"
     },
-    {
-      "type": "color",
-      "id": "price_color",
-      "label": "Price color",
-      "default": "#222222"
-    },
-    {
-      "type": "color",
-      "id": "compare_price_color",
-      "label": "Compare price color",
-      "default": "#999999"
-    },
+
     {
       "type": "checkbox",
       "id": "show_variants",

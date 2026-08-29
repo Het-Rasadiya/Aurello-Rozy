@@ -225,6 +225,22 @@
         "id": "shipping_active",
         "label": "Background Shipping Bar Active",
         "default": "#407c5d"
+      },
+      {
+        "type": "header",
+        "content": "Product card colors"
+      },
+      {
+        "type": "color",
+        "id": "price_color",
+        "label": "Price color",
+        "default": "#FF0000"
+      },
+      {
+        "type": "color",
+        "id": "compare_price_color",
+        "label": "Compare price color",
+        "default": "#737373"
       }
     ]
   },

@@ -25,6 +25,8 @@
     "color_body_text": "#414141",
     "color_cta": "rgba(0,0,0,0)",
     "color_button_text": "#000000",
+    "price_color": "#FF0000",
+    "compare_price_color": "#737373",
     "alert_text": "#000000",
     "alert_bg": "#d5f9da",
     "alert_bd": "#c3f7ca",

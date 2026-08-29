@@ -281,6 +281,21 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     }
     .product-card__name:hover { color: var(--g-main-2); }
     
+    {% if settings.price_color != blank %}
+    .product-card__price,
+    .product-card__pricesale,
+    .product-card__price span,
+    .product-card__pricesale span {
+      color: {{ settings.price_color }} !important;
+    }
+    {% endif %}
+    {% if settings.compare_price_color != blank %}
+    .product-card__regular-price,
+    .product-card__regular-price span {
+      color: {{ settings.compare_price_color }} !important;
+    }
+    {% endif %}
+    
     a{
       color: inherit;
     }
